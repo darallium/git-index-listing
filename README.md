@@ -1,3 +1,59 @@
+Japanese version is following below the english.
+# parse_git_index.py
+
+This Python script parses a `.git/index` file and prints its contents in a human-readable format. It provides similar functionality to the `git ls-files --stage` command.
+
+## Usage
+
+```bash
+python parse_git_index.py <path/to/.git/index>
+```
+
+Replace `<path/to/.git/index>` with the path to the `.git/index` file you want to parse. This is typically `.git/index` in the root directory of your Git repository.
+
+## Output
+
+The script prints each file entry in the following format:
+
+```
+<file mode> <SHA-1 hash> <stage number>\t<file name>
+```
+
+* **file mode:** The file's mode (octal representation).
+* **SHA-1 hash:** The SHA-1 hash of the file's contents.
+* **stage number:** The stage number (always 0).
+* **file name:** The file's name.
+
+Header information is also displayed:
+
+```
+==== header ===
+signature = DIRC
+version = <version number>
+entries = <number of entries>
+```
+
+## Dependencies
+
+This script requires Python 3.4 or later. It has no external library dependencies.  It uses the standard library `struct`, `os`, and `sys` modules.
+
+
+## Example
+
+```bash
+python parse_git_index.py .git/index
+```
+
+## Limitations
+
+* This script does not support all features of the `.git/index` file.  In particular, it does not handle extended index formats or resolve-undo information.
+* Performance issues may arise when processing extremely large `.git/index` files.
+
+## License
+
+This script is distributed under the MIT License. See the LICENSE file for details.
+
+
 # parse_git_index.py
 
 このPythonスクリプトは、`.git/index`ファイルを解析し、その内容を人間が読める形式で出力します。これは、`git ls-files --stage`コマンドと同様の機能を提供しますが、indexファイル単体で動作させることができます。
@@ -31,14 +87,6 @@ signature = DIRC
 version = <version number>
 entries = <number of entries>
 ```
-
-
-## エラー処理
-
-スクリプトには以下のエラー処理が含まれています。
-
-* `.git/index`ファイルが存在しない場合は、エラーメッセージを出力して終了します。
-* `.git/index`ファイルが不正な形式である場合（例：signatureが"DIRC"でない、データが破損しているなど）、エラーメッセージを出力して終了します。
 
 ## 依存関係
 
